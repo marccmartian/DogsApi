@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import RandomDogs from './components/RandomDogs';
 import './App.css';
 
 function App() {
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    const getRandomImage = async () => {
+      const response = await fetch('https://dog.ceo/api/breeds/image/random/10');
+      const data = await response.json();
+      setImages(data.message);
+    }
+    getRandomImage();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Find a Dog</h1>
+      <RandomDogs images={images} />
     </div>
   );
 }
