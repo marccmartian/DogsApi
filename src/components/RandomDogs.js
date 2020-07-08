@@ -4,8 +4,8 @@ const RandomDogs = ({ images }) => {
   return (
     <div>
       {
-        images.map(image => (
-          <img src={image} alt="dog" />
+        images.map((image, index) => (
+          <img src={image} alt="dog" key={index} />
         ))
       }
     </div>
